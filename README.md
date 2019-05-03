@@ -1,20 +1,4 @@
-# JetPHP
-PHP Framework to developing websites and systems
+# MVP Instagram usando JetPHP
+##Mínimo produto viável desenvolvido em PHP
 
-
-## Documentation
-The v1.0 documentation is being writed, you can read it at https://jetphp.github.io/
-
-### How to install?
-
-* Use **composer** for managing all dependencies
-
-```
- composer create-project --prefer-dist jetphp/jetphp:dev-master install_folder
-```
-
-If you don't have composer, [learn how to install](https://getcomposer.org/)
-
-### Version
-
-v1.0 **BETA**
+ Bom galera, estou gravando algumas aulas desenvolvendo esse MVP do Instagram em PHP, para quem interessar: em breve já estarei postando vídeos sobre no meu canal do youtube. https://www.youtube.com/c/KeniGamer
