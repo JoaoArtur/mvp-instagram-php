@@ -9,9 +9,6 @@
       unset($_SESSION['caminho']);
       if (!isset($_SESSION['caminho']) and file_exists('../app/view/'.$caminho.'.phtml')) {
         $_SESSION['caminho'] = $caminho;
-        if ($var != null and is_array($var)) {
-          extract($var);
-        }
 
         if ($admin) {
           $adm = 'admin/';
@@ -21,6 +18,10 @@
         include '../app/view/'.$adm.'inc/topo.phtml';
         if ($menu) {
           include '../app/view/'.$adm.'inc/menu.phtml';
+        }
+        if ($var != null and is_array($var)) {
+          extract($var);
+          print_r($var);
         }
         include '../app/view/'.$caminho.'.phtml';
         include '../app/view/'.$adm.'inc/rodape.phtml';

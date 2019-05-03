@@ -1,0 +1,44 @@
+body {
+    background: #fafafa;
+}
+.menu {
+    display: block;
+    height: 75px;
+    background: #fff;
+    margin: 0;
+    border-bottom: 1px solid #d3d9df;
+}
+.menu-logo {
+    margin: 0;
+    line-height: 75px;
+    color: #000;
+    font-size: 16pt;
+    font-weight: bold;
+}
+.menu-ul {
+    margin: 0;
+    font-size: 24px;
+    list-style-type: none;
+}
+
+li + li{
+    padding-left: 20px;
+}
+.menu-ul li {
+    margin: 0;
+    line-height: 75px;
+    float: left;
+}
+.menu-ul li a {
+    color: #000;
+}
+.menu form {
+    margin-top: calc(75px / 4);
+}
+
+
+#dash {
+    padding-top: 60px;
+    padding-left: 10px;
+    padding-right: 10px;
+}

@@ -1,11 +1,18 @@
 <?php
   use JetPHP\Model\Route;
-  Route::add('/','index@InicioControle');
+  use Insta\MVPUtils;
+  $utils = new MVPUtils();
 
-  // Manager routes, remove only if you'll not use.
-  Route::add(\JetPHP\Model\Config::show('PASTA_ADMIN').':pagina','pagina@AdministradorControle');
-  Route::add(\JetPHP\Model\Config::show('PASTA_ADMIN').'','index@AdministradorControle');
+  if ($utils->isOnline()) {
+    Route::add('/', 'paginaInicial@MVPGramController');
+    Route::add('new-post/', 'novoPost@MVPGramController');
 
-  // Install route, remove after installing.
-  Route::add('install','index@InstalacaoControle');
+
+
+
+  } else {
+    Route::add('/','login@MVPController');
+    Route::add('api/:pagina', 'api@MVPController');
+    Route::add('accounts/:tipo', 'account@MVPController');
+  }
 ?>

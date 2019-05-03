@@ -62,7 +62,7 @@
     public function sendFile() {
       if ($this->checkUpload()) {
         if (move_uploaded_file($this->tmp_file, $this->generateCompletePath())) {
-          return ['status'=>'success', 'msg'=>'File uploaded as '.$this->generateCompletePath().'!'];
+          return ['status'=>'success', 'msg'=>'File uploaded as '.$this->generateCompletePath().'!', 'name'=>$this->filename.$this->ext];
         }
       } else {
         // Extension error

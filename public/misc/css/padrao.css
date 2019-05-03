@@ -1,41 +1,48 @@
-#centro {
-  margin-top: calc(50vh - 100px);
-  font-family: "Source Sans Pro";
-}
 body {
-  overflow: hidden;
+  background: #fafafa;
 }
-.doc-menu {
-  height: 100vh;
-  background-color: #e9e9e9;
+.box + .box {
+  margin-top: 15px;
 }
-.doc-menu h3, .doc-menu p {
-  padding-left: 15px;
-  padding-top: 5px;
-}
-
-.doc-menu ul {
-  width: 100vw;
-  list-style: none;
-  padding: 0;
-}
-.doc-menu ul li {
-  padding: 10px;
-  transition: ease 0.7s;
+.box {
+  border: 1px solid #ddd;
+  background: #fff;
+  padding: 20px;
 }
 
-
-.doc-menu ul li:hover, .doc-menu ul li.active {
-  background-color: #e5e5e5;
-}
-.doc-menu ul li a {
-  text-decoration: none;
-  color: #333;
+.box-header {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-.doc {
-  height: 100vh;
-  width: 100vw;
-  background-color: #e5e5e5;
-  overflow: auto;
+.box-header h1 {
+  font-size: 24pt;
+}
+.box-content {
+  width: 80%;
+  margin: auto auto;
+}
+
+.box-hidden {
+  display: none;
+}
+
+input[type="text"],input[type="password"] {
+  background: #fefefe;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+.btn-insta {
+  background: #3897f0;
+  color: #fff;
+  width: 100%;
+  height: auto;
+}
+
+#login {
+  margin-top: 30px;
+}
+#register {
+  margin-top: 10px;
 }
