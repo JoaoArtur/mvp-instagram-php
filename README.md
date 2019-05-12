@@ -5,4 +5,5 @@ Em inglês significa *Minimum Viable Product*, na tradução: Produto viável m�
 Basicamente seria fazer uma versão mínima sobre algum projeto seu ou já existente, no nosso caso o Instagram.
 
 
-Em breve irei dar notícias sobre as vídeo-aulas :-)
+## Aulas
+- Aula 1: https://www.youtube.com/watch?v=V-vB_-q1zSw
