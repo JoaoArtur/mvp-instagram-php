@@ -6,4 +6,6 @@ Basicamente seria fazer uma versão mínima sobre algum projeto seu ou já exist
 
 
 ## Aulas
+- Playlist: https://www.youtube.com/playlist?list=PLjuZRKF7kA20N3TBSZy7o9q7qqpN7VdUU
 - Aula 1: https://www.youtube.com/watch?v=V-vB_-q1zSw
+- Aula 2: https://www.youtube.com/watch?v=NJRPYm3yrGU
