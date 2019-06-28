@@ -4,12 +4,7 @@
   $utils = new MVPUtils();
 
   if ($utils->isOnline()) {
-    Route::add('/', 'paginaInicial@MVPGramController');
-    Route::add('new-post/', 'novoPost@MVPGramController');
-
-
-
-
+    Route::add('/', 'dashboard@MVPGramController');
   } else {
     Route::add('/','login@MVPController');
     Route::add('api/:pagina', 'api@MVPController');

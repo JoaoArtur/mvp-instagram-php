@@ -1,5 +1,6 @@
 body {
     background: #fafafa;
+    padding-bottom:30px;
 }
 .menu {
     display: block;
@@ -35,10 +36,61 @@ li + li{
 .menu form {
     margin-top: calc(75px / 4);
 }
+.container-insta {
+    width: 70%;
+    margin: auto auto;
+    margin-top: 40px;
+}
 
-
-#dash {
-    padding-top: 60px;
+/* Post */
+.card-post .card-header {
+    display: flex;
+    align-items: center;
+}
+.card-post .card-header {
+    background-color: #fff;
+    border: 1px solid #eee;
+    max-height: 60px;
+}
+.card-post .card-header span {
     padding-left: 10px;
-    padding-right: 10px;
+    font-weight: 600
+}
+.card-post .card-footer, .card-post .card-body {
+    background-color: #fff;
+    border: 1px solid #eee;
+}
+.card-post .post-usericon {
+    max-height: 100%;
+    border-radius: 50%;
+}
+
+.card-post .post-image {
+    min-height: 500px;
+    background: #eee;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat !important
+}
+
+/* Post - action buttons */
+.card-post .actionButtons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+.card-post .actionButtons .item {
+    font-weight: 400;
+    font-size: 18pt;
+}
+.card-post .actionButtons .item + .item {
+    padding-left: 15px;
+}
+.post-comments .comment .user {
+    font-weight: 600; 
+    padding-right: 3px;   
+}
+.post-comments .comment .text {
+    font-weight: 500;
 }

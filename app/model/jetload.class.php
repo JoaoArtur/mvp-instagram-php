@@ -8,13 +8,15 @@
 		public $viewPath = '../app/view/';
 		public $vars;
 
-		public function view($path,$vars=[]) {
+		public function view($path) {
 			$path = Format::convertPoints($path);
 			if (file_exists($this->viewPath.$path.'.phtml')) {
-				extract ($vars, EXTR_OVERWRITE);
+				if ($this->vars != null) {
+					extract ($this->vars, EXTR_OVERWRITE);
+				}
 				if ($this->top != false && file_exists($this->viewPath.$this->top.'.phtml')) { include $this->viewPath.$this->top.'.phtml'; }
 				if ($this->menu != false && file_exists($this->viewPath.$this->menu.'.phtml')) { include $this->viewPath.$this->menu.'.phtml'; }
-				extract($this->vars);
+
 				include $this->viewPath.$path.'.phtml';
 				if ($this->footer != false && file_exists($this->viewPath.$this->footer.'.phtml')) { include $this->viewPath.$this->footer.'.phtml'; }
 			} else {

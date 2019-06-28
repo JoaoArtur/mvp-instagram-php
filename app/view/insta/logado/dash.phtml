@@ -1,12 +1,58 @@
-<section id="dash">
-    <div class="container">
+<section id="dashboard">
+    <div class="container-insta">
         <div class="row">
-            <div class="col-lg-8" id="posts">
+            <div class="col-lg-8">
+                <!-- Modelo publicação -->
                 <?php
-                    print_r($posts);
+                    if (isset($posts)):
+                        foreach ($posts as $post):
+                ?> 
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card card-post">
+                                <div class="card-header">
+                                    <img class="post-usericon" src="<?=$post->imagemUsuario;?>" alt="João Artur">
+                                    <span><?=$post->usuario;?></span>
+                                </div>
+
+                                <div class="card-body post-image" data-img="<?=$post->imagem;?>">
+
+                                </div>
+
+                                <div class="card-footer">
+                                    <div class="actionButtons">
+                                        <div class="item">
+                                            <i class="fa fa-heart-o"></i>
+                                        </div>
+                                        <div class="item">
+                                            <i class="fa fa-comment-o"></i>
+                                        </div>
+                                        <div class="item">
+                                            <i class="fa fa-share-square-o"></i>
+                                        </div>
+                                    </div>
+
+                                    <span class="text-bold">100 curtidas</span>
+
+                                    <div class="post-comments">
+                                        <div class="comment">
+                                            <span class="user">joaoarturdev</span>
+                                            <span class="text"><?=$post->descricao;?></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php
+                        endforeach;
+                    endif;
                 ?>
+
             </div>
-            <div class="col-lg-4">STORIES</div>
+            <div class="col-lg-4">
+                <h1>Stories</h1>
+            </div>
         </div>
     </div>
 </section>

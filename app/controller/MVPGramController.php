@@ -1,37 +1,20 @@
 <?php
-    use Insta\MVPGram;
     use JetPHP\Model\JetLoad;
-    class MVPGramController extends Controle {
-        private static function load($path, $vars=false) {
-            $jl = new JetLoad();
-            $jl->addVars($vars);
-            $jl->setTop('insta.logado.inc.top')
-                ->setMenu('insta.logado.inc.menu')
-                ->setFooter('insta.logado.inc.footer')->view($path);
-        }
-        public static function paginaInicial() {
-            $core = new MVPGram();
-            $dadosUser = $core->getDadosUsuario();
-            $posts = $core->listarPosts();
-
-            return self::load('insta.logado.dash',
-                [
-                    'dadosUsuario' => $dadosUser,
-                    'posts' => $posts
-                ]);
+    class MVPGramController extends MVPGram {
+        public function __construct() {
+            parent::__construct();
         }
 
+        private static function load($view, $vars=null) {
+            $jt = new JetLoad();
+            $jt->setTop('insta.logado.inc.top');
+            $jt->setMenu('insta.logado.inc.menu');
+            $jt->setFooter('insta.logado.inc.footer');
+            $jt->addVars($vars);
+            $jt->view($view);
+        }
 
-        public static function novoPost() {
-            $core = new MVPGram();
-            $dadosUser = $core->getDadosUsuario();
-            if (isset($_POST['descricao'])) {
-                $post = $core->enviarPost();
-                if ($post) {
-                    echo "Imagem enviada com sucesso";
-                }
-            }
-
-            return self::load('insta.logado.newpost');
+        public static function dashboard() {
+            return self::load('insta.logado.dash', ['dadosUsuario' => self::$dadosUsuario, 'posts' => self::getPosts()]);
         }
     }
