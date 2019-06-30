@@ -15,69 +15,6 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
---
--- Table structure for table `posts`
---
-
-DROP TABLE IF EXISTS `posts`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `posts` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_usuario` int(11) DEFAULT NULL,
-  `imagem` varchar(255) DEFAULT NULL,
-  `descricao` varchar(400) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `posts_marcacoes`
---
-
-DROP TABLE IF EXISTS `posts_marcacoes`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `posts_marcacoes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_post` int(11) DEFAULT NULL,
-  `id_usuario` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `posts_marcacoes`
---
-
-LOCK TABLES `posts_marcacoes` WRITE;
-/*!40000 ALTER TABLE `posts_marcacoes` DISABLE KEYS */;
-/*!40000 ALTER TABLE `posts_marcacoes` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `stories`
---
-
-DROP TABLE IF EXISTS `stories`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `stories` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_usuario` int(11) DEFAULT NULL,
-  `imagem` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `stories`
---
-
-LOCK TABLES `stories` WRITE;
-/*!40000 ALTER TABLE `stories` DISABLE KEYS */;
-/*!40000 ALTER TABLE `stories` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `usuarios`
@@ -112,7 +49,9 @@ CREATE TABLE `usuarios_seguir` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_usuario` int(11) DEFAULT NULL,
   `id_seguido` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (id_usuario) REFERENCES usuarios (id)
+  FOREIGN KEY (id_seguido) REFERENCES usuarios (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -133,5 +72,74 @@ UNLOCK TABLES;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+
+--
+-- Table structure for table `posts`
+--
+
+DROP TABLE IF EXISTS `posts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `posts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_usuario` int(11) DEFAULT NULL,
+  `imagem` varchar(255) DEFAULT NULL,
+  `descricao` varchar(400) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (id_usuario) REFERENCES usuarios (id)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `posts_marcacoes`
+--
+
+DROP TABLE IF EXISTS `posts_marcacoes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `posts_marcacoes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_post` int(11) DEFAULT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (id_post) REFERENCES posts (id),
+  FOREIGN KEY (id_usuario) REFERENCES usuarios (id)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `posts_marcacoes`
+--
+
+LOCK TABLES `posts_marcacoes` WRITE;
+/*!40000 ALTER TABLE `posts_marcacoes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `posts_marcacoes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `stories`
+--
+
+DROP TABLE IF EXISTS `stories`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `stories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_usuario` int(11) DEFAULT NULL,
+  `imagem` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (id_usuario) REFERENCES usuarios (id)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `stories`
+--
+
+LOCK TABLES `stories` WRITE;
+/*!40000 ALTER TABLE `stories` DISABLE KEYS */;
+/*!40000 ALTER TABLE `stories` ENABLE KEYS */;
+UNLOCK TABLES;
 
 -- Dump completed on 2019-05-03 19:56:13
