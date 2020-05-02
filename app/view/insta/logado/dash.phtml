@@ -1,7 +1,7 @@
 <section id="dashboard">
-    <div class="container-insta">
-        <div class="row">
-            <div class="col-lg-8">
+    <div class="container mt-3">
+        <div class="row mx-auto">
+            <div class="col-lg-7">
                 <!-- Modelo publicação -->
                 <?php
                     if (isset($posts)):
@@ -15,20 +15,20 @@
                                     <span><?=$post->usuario;?></span>
                                 </div>
 
-                                <div class="card-body post-image" data-img="<?=$post->imagem;?>">
+                                <div class="card-body post-image" data-img="<?=$post->imagem;?>" data-idpost="<?=$post->id;?>">
 
                                 </div>
 
                                 <div class="card-footer">
                                     <div class="actionButtons">
-                                        <div class="item">
-                                            <i class="fa fa-heart-o"></i>
+                                        <div class="item likeButton" data-idPost="<?=$post->id?>">
+                                            <i class="far fa-heart"></i>
                                         </div>
                                         <div class="item">
-                                            <i class="fa fa-comment-o"></i>
+                                            <i class="far fa-comment"></i>
                                         </div>
                                         <div class="item">
-                                            <i class="fa fa-share-square-o"></i>
+                                            <i class="far fa-share-square"></i>
                                         </div>
                                     </div>
 
@@ -36,7 +36,7 @@
 
                                     <div class="post-comments">
                                         <div class="comment">
-                                            <span class="user">joaoarturdev</span>
+                                            <span class="user"><?=$post->usuario;?></span>
                                             <span class="text"><?=$post->descricao;?></span>
                                         </div>
                                     </div>
@@ -50,7 +50,7 @@
                 ?>
 
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-3">
                 <h1>Stories</h1>
             </div>
         </div>

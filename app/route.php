@@ -7,7 +7,8 @@
     Route::add('/', 'dashboard@MVPGramController');
   } else {
     Route::add('/','login@MVPController');
-    Route::add('api/:pagina', 'api@MVPController');
     Route::add('accounts/:tipo', 'account@MVPController');
   }
+  Route::add('api/:p', 'index@APIController');
+  
 ?>

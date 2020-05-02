@@ -12,8 +12,8 @@
 
   // Database configuration
   Config::add('DB_HOST','localhost');
-  Config::add('DB_USUARIO','root');
-  Config::add('DB_SENHA','');
+  Config::add('DB_USUARIO','mvp');
+  Config::add('DB_SENHA','mvpgr4m');
   Config::add('DB_NOME','mvpgram');
   
   // E-mail configuration

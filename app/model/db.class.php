@@ -2,11 +2,11 @@
   namespace JetPHP\Model;
   class DB {
     private static $conexao = null;
-    private static $qr      = null;
+    public static $qr      = null;
     private static $sql     = null;
 
     public static function getInstance() {
-      return self::connect();
+      return new self;
     }
 
     private static function connect() {

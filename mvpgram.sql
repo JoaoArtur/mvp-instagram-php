@@ -50,7 +50,7 @@ CREATE TABLE `usuarios_seguir` (
   `id_usuario` int(11) DEFAULT NULL,
   `id_seguido` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (id_usuario) REFERENCES usuarios (id)
+  FOREIGN KEY (id_usuario) REFERENCES usuarios (id),
   FOREIGN KEY (id_seguido) REFERENCES usuarios (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
