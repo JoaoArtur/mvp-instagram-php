@@ -14,3 +14,4 @@ Basicamente seria fazer uma versão mínima sobre algum projeto seu ou já exist
 - Aula 3: https://www.youtube.com/watch?v=iRZCX549-3I
 - Aula 4: https://www.youtube.com/watch?v=ZSfgWDKEFD8
 - Aula 5: https://www.youtube.com/watch?v=O93ZUL4S7is
+- Aula 6: https://www.youtube.com/watch?v=4KuPnJvIOE4
