@@ -8,7 +8,7 @@
                         foreach ($posts as $post):
                 ?> 
                     <div class="row">
-                        <div class="col-lg-12">
+                        <div class="col-lg-12 mb-2">
                             <div class="card card-post">
                                 <div class="card-header">
                                     <img class="post-usericon" src="<?=$post->imagemUsuario;?>" alt="João Artur">
@@ -22,7 +22,7 @@
                                 <div class="card-footer">
                                     <div class="actionButtons">
                                         <div class="item likeButton" data-idPost="<?=$post->id?>">
-                                            <i class="far fa-heart"></i>
+                                            <i class="<?=($post->liked>0)?'text-danger fas':'far';?> fa-heart"></i>
                                         </div>
                                         <div class="item">
                                             <i class="far fa-comment"></i>
@@ -37,7 +37,7 @@
                                     <div class="post-comments">
                                         <div class="comment">
                                             <span class="user"><?=$post->usuario;?></span>
-                                            <span class="text"><?=$post->descricao;?></span>
+                                            <span class="text"><?=nl2br($post->descricao);?></span>
                                         </div>
                                     </div>
                                 </div>

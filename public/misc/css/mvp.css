@@ -96,3 +96,11 @@ li + li{
 .post-comments .comment .text {
     font-weight: 500;
 }
+
+
+.profile-link{
+    text-decoration: none!important;
+}
+.border-round {
+    border-radius: 50%;
+}
