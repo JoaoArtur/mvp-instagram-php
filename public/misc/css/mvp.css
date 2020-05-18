@@ -104,3 +104,11 @@ li + li{
 .border-round {
     border-radius: 50%;
 }
+.submitComment {
+    background: transparent;
+    border: transparent;
+
+}
+.submitComment svg {
+    color: #3498db;
+}

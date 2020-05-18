@@ -42,7 +42,7 @@ class API
                 } else {
                     $arr = [
                         'status' => 'likeError'
-                        
+
                     ];
                 }
             }
@@ -53,7 +53,60 @@ class API
             ];
         }
     }
-
+    protected function comment()
+    {
+        if (isset($_POST['id_post'])) {
+            $msg = Start::post('message');
+            $id_post = Start::post('id_post');
+            $id_user = Start::session('id_user');
+    
+            $qr = DB::getInstance()->execute("SELECT * FROM posts WHERE id = ?", [$id_post]);
+            if ($qr->count() > 0) {
+                $qr_comment = DB::getInstance()->execute(
+                    "INSERT INTO post_comments (id_user,id_post,`message`) VALUES (?,?,?)",
+                    [$id_user, $id_post, $msg]
+                );
+                if ($qr_comment->count() > 0) {
+                    $arr = [
+                        'status'=>true
+                    ];
+                } else {
+                    $arr = [
+                        'status'=>false
+                    ];
+                }
+            } else {
+                $arr = [
+                    'status'=>false
+                ];
+            }
+        } else {
+            $arr = [
+                'status'=>false
+            ];
+        }
+        return $arr;
+    }
+    protected function getPosts() {
+        $qr = DB::execute("SELECT p.*, u.nome, u.usuario, u.foto as imagemUsuario,pl.id as liked,(SELECT CONCAT( '[', GROUP_CONCAT(JSON_OBJECT('nome', usr.usuario, 'msg', post_comments.message)), ']') from post_comments INNER JOIN usuarios usr ON usr.id = post_comments.id_user WHERE id_post=p.id) as comments
+        FROM posts as p
+            INNER JOIN usuarios u ON u.id = p.id_usuario
+            LEFT JOIN post_likes pl ON pl.id_user = ? and pl.id_post = p.id
+            ", [
+            Start::session('id_user')
+        ]); 
+        if ($qr->count() > 0) {
+            $posts = $qr->generico()->fetchAll(PDO::FETCH_ASSOC);
+            foreach($posts as $index=>$post) {
+                ob_start();
+                require('../app/view/insta/logado/post.phtml');
+                $html_post = ob_get_contents();
+                ob_end_clean();
+                $posts[$index]['html']=$html_post;
+            }
+            return $posts;
+        }
+    }
     public function login()
     {
         $credencial = Start::post('user');
@@ -69,12 +122,12 @@ class API
             $_SESSION['id_user'] = $qr->list(\PDO::FETCH_OBJ)->id;
             return [
                 'status' => true,
-                'msg'=>'Logado com sucesso'
+                'msg' => 'Logado com sucesso'
             ];
         } else {
             return [
                 'status' => false,
-                'msg'=>'Erro ao logar'
+                'msg' => 'Erro ao logar'
             ];
         }
     }
@@ -110,12 +163,12 @@ class API
                 }
                 return [
                     'status' => true,
-                    'msg'=>'Cadastrado com sucesso'
+                    'msg' => 'Cadastrado com sucesso'
                 ];
             } else {
                 return [
                     'status' => false,
-                    'msg'=>'Erro ao cadastrar-se'
+                    'msg' => 'Erro ao cadastrar-se'
                 ];
             }
         }

@@ -35,7 +35,8 @@ class MVPGram
     }
     public function getPostsByUid($uid)
     {
-        $qr = DB::execute("SELECT p.*, u.nome, u.usuario, u.foto as imagemUsuario,pl.id as liked FROM posts as p
+        $qr = DB::execute("SELECT p.*, u.nome, u.usuario, u.foto as imagemUsuario,pl.id as liked
+        FROM posts as p
             INNER JOIN usuarios u ON u.id = p.id_usuario
             LEFT JOIN post_likes pl ON pl.id_user = ? and pl.id_post = p.id
         WHERE p.id_usuario = ?", [
@@ -50,7 +51,10 @@ class MVPGram
     }
     public function getPosts()
     {
-        $qr = DB::execute("SELECT p.*, u.nome, u.usuario, u.foto as imagemUsuario,pl.id as liked FROM posts as p
+        $qr = DB::execute("SELECT p.*, u.nome, u.usuario, u.foto as imagemUsuario,pl.id as liked, 
+        (SELECT CONCAT('[', GROUP_CONCAT(JSON_OBJECT('nome',usr.usuario,'msg',post_comments.message)), ']') 
+        FROM post_comments INNER JOIN usuarios usr ON usr.id = post_comments.id_user WHERE id_post=p.id) as comments
+        FROM posts as p
             INNER JOIN usuarios u ON u.id = p.id_usuario
             LEFT JOIN post_likes pl ON pl.id_user = ? and pl.id_post = p.id", [
             Start::session('id_user')

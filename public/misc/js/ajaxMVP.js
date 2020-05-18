@@ -1,9 +1,52 @@
+document.removedFst=0;
 $(document).ready(function () {
-    $('.post-image[data-img!=""]').each(function (index, elem) {
-        $(elem).css('background-image', 'url(' + $(elem).data('img') + ')');
-    });
+    loadImg();
     $(document).on('click', '.likeButton', doLike);
     $(document).on('dblclick', '.post-image', doLike);
+    $(document).on('submit', '.commentContainer', function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: '/api/comment',
+            dataType: 'json',
+            data: $(this).serialize(),
+            method: 'POST',
+            success: function (data) {
+                console.log(data);
+                updatePosts();
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    });
+
+    function loadImg() {
+        $('.post-image[data-img!=""]').each(function (index, elem) {
+            $(elem).css('background-image', 'url(' + $(elem).data('img') + ')');
+        });
+    }
+
+    function updatePosts() {
+        $.ajax({
+            url: '/api/getPosts',
+            method: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                var elems = '';
+                data.forEach(element => {
+                    elems += element.html;
+                });
+                $('#postContainer').html(elems);
+                loadImg();
+
+                if(!document.removedFst){
+                    $('.card-post')[$('.card-post').length - 1].remove();
+                    document.removedFst=1;
+                }
+                
+            }
+        });
+    }
 
     function doLike() {
         var id = $(this).data('idpost');
