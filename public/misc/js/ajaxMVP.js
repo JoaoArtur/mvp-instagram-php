@@ -1,4 +1,4 @@
-document.removedFst=0;
+document.removedFst = 0;
 $(document).ready(function () {
     loadImg();
     $(document).on('click', '.likeButton', doLike);
@@ -16,6 +16,22 @@ $(document).ready(function () {
             },
             error: function (err) {
                 console.log(err);
+            }
+        });
+    });
+    $(document).on('click', '.followUser', function (e) {
+        e.preventDefault();
+        var iduser = $(this).data('usuario');
+        $.ajax({
+            url: '/api/followUser',
+            dataType: 'JSON',
+            method: 'POST',
+            data: 'id_user=' + iduser,
+            success: function (ret) {
+                console.log(ret);
+                if (ret.status) {
+                    $('.followUser[data-usuario=' + iduser + ']').empty().append(ret.txt);
+                }
             }
         });
     });
@@ -39,11 +55,11 @@ $(document).ready(function () {
                 $('#postContainer').html(elems);
                 loadImg();
 
-                if(!document.removedFst){
+                if (!document.removedFst) {
                     $('.card-post')[$('.card-post').length - 1].remove();
-                    document.removedFst=1;
+                    document.removedFst = 1;
                 }
-                
+
             }
         });
     }

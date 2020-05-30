@@ -4,52 +4,52 @@
             <div class="col-lg-7">
                 <!-- Modelo publicação -->
                 <?php
-                if (isset($posts)) :
-                    foreach ($posts as $post) :
-                        $comments = json_decode($post->comments);
-                ?>
-                        <div class="row" id="postContainer">
-                            <div class="col-lg-12 mb-2">
-                                <div class="card card-post">
-                                    <div class="card-header">
-                                        <img class="post-usericon" src="<?= $post->imagemUsuario; ?>" alt="João Artur">
-                                        <span><?= $post->usuario; ?></span>
-                                    </div>
+if (isset($posts)):
+    foreach ($posts as $post):
+        $comments = json_decode($post->comments);
+        ?>
+				                        <div class="row" id="postContainer">
+				                            <div class="col-lg-12 mb-2">
+				                                <div class="card card-post">
+				                                    <div class="card-header">
+				                                        <img class="post-usericon" src="<?=$post->imagemUsuario;?>" alt="João Artur">
+				                                        <span><?=$post->usuario;?></span>
+				                                    </div>
 
-                                    <div class="card-body post-image" data-img="<?= $post->imagem; ?>" data-idpost="<?= $post->id; ?>">
+				                                    <div class="card-body post-image" data-img="<?=$post->imagem;?>" data-idpost="<?=$post->id;?>">
 
-                                    </div>
+				                                    </div>
 
-                                    <div class="card-footer">
-                                        <div class="actionButtons">
-                                            <div class="item likeButton" data-idPost="<?= $post->id ?>">
-                                                <i class="<?= ($post->liked > 0) ? 'text-danger fas' : 'far'; ?> fa-heart"></i>
-                                            </div>
-                                            <div class="item">
-                                                <i class="far fa-comment"></i>
-                                            </div>
-                                            <div class="item">
-                                                <i class="far fa-share-square"></i>
-                                            </div>
-                                        </div>
+				                                    <div class="card-footer">
+				                                        <div class="actionButtons">
+				                                            <div class="item likeButton" data-idPost="<?=$post->id?>">
+				                                                <i class="<?=($post->liked > 0) ? 'text-danger fas' : 'far';?> fa-heart"></i>
+				                                            </div>
+				                                            <div class="item">
+				                                                <i class="far fa-comment"></i>
+				                                            </div>
+				                                            <div class="item">
+				                                                <i class="far fa-share-square"></i>
+				                                            </div>
+				                                        </div>
 
-                                        <span class="text-bold">100 curtidas</span>
-                                        <div class="post-comments" data-idpost="<?=$post->id;?>">
-                                            <?php if ($post->descricao != ''): ?>
-                                            <div class="comment">
-                                                <span class="user"><?= $post->usuario; ?></span>
-                                                <span class="text"><?= nl2br($post->descricao); ?></span>
-                                            </div>
-                                            <?php endif;
-                                                foreach($comments as $comment):
-                                                    ?>
-                                                    <div class="comment">
-                                                        <span class="user"><?= $comment->nome; ?></span>
-                                                        <span class="text"><?= nl2br($comment->msg); ?></span>
-                                                    </div>
-                                                    <?php
-                                                endforeach;
-                                            ?>
+				                                        <span class="text-bold">100 curtidas</span>
+				                                        <div class="post-comments" data-idpost="<?=$post->id;?>">
+				                                            <?php if ($post->descricao != ''): ?>
+				                                            <div class="comment">
+				                                                <span class="user"><?=$post->usuario;?></span>
+				                                                <span class="text"><?=nl2br($post->descricao);?></span>
+				                                            </div>
+				                                            <?php endif;
+    foreach ($comments as $comment):
+    ?>
+		                                                    <div class="comment">
+		                                                        <span class="user"><?=$comment->nome;?></span>
+		                                                        <span class="text"><?=nl2br($comment->msg);?></span>
+		                                                    </div>
+		                                                    <?php
+endforeach;
+?>
                                         </div>
                                         <form method="POST" action="" class="d-flex commentContainer">
                                             <div class="w-100 d-inline p-2">
@@ -65,9 +65,9 @@
                             </div>
                         </div>
                 <?php
-                    endforeach;
-                endif;
-                ?>
+endforeach;
+endif;
+?>
 
             </div>
             <div class="col-lg-3">

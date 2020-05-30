@@ -18,30 +18,30 @@ class API
         $id_post = Start::post("id_post");
         if (isset($_POST['id_post'])) {
             $qr = DB::execute("SELECT * FROM post_likes WHERE id_user = ? and id_post = ?", [
-                $id_user, $id_post
+                $id_user, $id_post,
             ]);
             if ($qr->count() > 0) {
                 $qr_deslike = DB::getInstance()->execute("DELETE FROM post_likes WHERE id_user = ? and id_post = ?", [
-                    $id_user, $id_post
+                    $id_user, $id_post,
                 ]);
                 if ($qr_deslike->count() > 0) {
                     $arr = [
-                        'status' => 'deslikeSuccess'
+                        'status' => 'deslikeSuccess',
                     ];
                 } else {
                     $arr = [
-                        'status' => 'deslikeError'
+                        'status' => 'deslikeError',
                     ];
                 }
             } else {
                 $qr_like = DB::getInstance()->execute("INSERT INTO post_likes (id_post, id_user) VALUES ($id_post,$id_user)");
                 if ($qr_like->count() > 0) {
                     $arr = [
-                        'status' => 'likeSuccess'
+                        'status' => 'likeSuccess',
                     ];
                 } else {
                     $arr = [
-                        'status' => 'likeError'
+                        'status' => 'likeError',
 
                     ];
                 }
@@ -49,7 +49,7 @@ class API
             return $arr;
         } else {
             return [
-                'status' => 'Nenhum id recebido'
+                'status' => 'Nenhum id recebido',
             ];
         }
     }
@@ -59,7 +59,7 @@ class API
             $msg = Start::post('message');
             $id_post = Start::post('id_post');
             $id_user = Start::session('id_user');
-    
+
             $qr = DB::getInstance()->execute("SELECT * FROM posts WHERE id = ?", [$id_post]);
             if ($qr->count() > 0) {
                 $qr_comment = DB::getInstance()->execute(
@@ -68,41 +68,42 @@ class API
                 );
                 if ($qr_comment->count() > 0) {
                     $arr = [
-                        'status'=>true
+                        'status' => true,
                     ];
                 } else {
                     $arr = [
-                        'status'=>false
+                        'status' => false,
                     ];
                 }
             } else {
                 $arr = [
-                    'status'=>false
+                    'status' => false,
                 ];
             }
         } else {
             $arr = [
-                'status'=>false
+                'status' => false,
             ];
         }
         return $arr;
     }
-    protected function getPosts() {
+    protected function getPosts()
+    {
         $qr = DB::execute("SELECT p.*, u.nome, u.usuario, u.foto as imagemUsuario,pl.id as liked,(SELECT CONCAT( '[', GROUP_CONCAT(JSON_OBJECT('nome', usr.usuario, 'msg', post_comments.message)), ']') from post_comments INNER JOIN usuarios usr ON usr.id = post_comments.id_user WHERE id_post=p.id) as comments
         FROM posts as p
             INNER JOIN usuarios u ON u.id = p.id_usuario
             LEFT JOIN post_likes pl ON pl.id_user = ? and pl.id_post = p.id
             ", [
-            Start::session('id_user')
-        ]); 
+            Start::session('id_user'),
+        ]);
         if ($qr->count() > 0) {
             $posts = $qr->generico()->fetchAll(PDO::FETCH_ASSOC);
-            foreach($posts as $index=>$post) {
+            foreach ($posts as $index => $post) {
                 ob_start();
-                require('../app/view/insta/logado/post.phtml');
+                require '../app/view/insta/logado/post.phtml';
                 $html_post = ob_get_contents();
                 ob_end_clean();
-                $posts[$index]['html']=$html_post;
+                $posts[$index]['html'] = $html_post;
             }
             return $posts;
         }
@@ -116,19 +117,28 @@ class API
             $credencial,
             $credencial,
             $credencial,
-            $pass
+            $pass,
         ]);
         if ($qr->count() > 0) {
             $_SESSION['id_user'] = $qr->list(\PDO::FETCH_OBJ)->id;
             return [
                 'status' => true,
-                'msg' => 'Logado com sucesso'
+                'msg' => 'Logado com sucesso',
             ];
         } else {
             return [
                 'status' => false,
-                'msg' => 'Erro ao logar'
+                'msg' => 'Erro ao logar',
             ];
+        }
+    }
+    public function followUser()
+    {
+        $gram = new MVPGram;
+        if (isset($_POST['id_user'])) {
+            return $gram->followUser(Start::post('id_user'));
+        } else {
+            return ['status' => false, 'msg' => 'Nenhum id de usuário recebido'];
         }
     }
     public function register()
@@ -142,7 +152,10 @@ class API
         $usuarioJaExiste = $utils->userExists($telefone, $usuario);
         $tipoCad = 'telefone';
         $email = '';
-        if (strstr($telefone, '@')) $tipoCad = 'email';
+        if (strstr($telefone, '@')) {
+            $tipoCad = 'email';
+        }
+
         $email = $telefone;
         $telefone = '';
 
@@ -154,7 +167,7 @@ class API
                 $usuario,
                 $telefone,
                 $email,
-                $senha
+                $senha,
             ]);
             if ($qr->count() > 0) {
                 $c1 = DB::execute("SELECT LAST_INSERT_ID() as id");
@@ -163,12 +176,12 @@ class API
                 }
                 return [
                     'status' => true,
-                    'msg' => 'Cadastrado com sucesso'
+                    'msg' => 'Cadastrado com sucesso',
                 ];
             } else {
                 return [
                     'status' => false,
-                    'msg' => 'Erro ao cadastrar-se'
+                    'msg' => 'Erro ao cadastrar-se',
                 ];
             }
         }
