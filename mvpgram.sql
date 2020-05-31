@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 31-Maio-2020 às 00:43
+-- Tempo de geração: 31-Maio-2020 às 03:33
 -- Versão do servidor: 10.4.11-MariaDB
 -- versão do PHP: 7.2.31
 
@@ -33,13 +33,6 @@ CREATE TABLE `posts` (
   `imagem` varchar(255) DEFAULT NULL,
   `descricao` varchar(400) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `posts`
---
-
-INSERT INTO `posts` (`id`, `id_usuario`, `imagem`, `descricao`) VALUES
-(3, 4, '/upload/posts/101060212_158912432283207_4607383583723038672_n.jpg', 'Último job entregue pela JA Solutions!\r\nQuer fazer um site personalizado para sua empresa e melhorar as vendas ou orçamentos durante essa crise?\r\nFaça já seu orçamento via whatsapp (51) 99712-5483');
 
 -- --------------------------------------------------------
 
@@ -78,13 +71,6 @@ CREATE TABLE `post_likes` (
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Extraindo dados da tabela `post_likes`
---
-
-INSERT INTO `post_likes` (`id`, `id_post`, `id_user`) VALUES
-(1, 3, 4);
-
 -- --------------------------------------------------------
 
 --
@@ -116,14 +102,6 @@ CREATE TABLE `usuarios` (
   `foto` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Extraindo dados da tabela `usuarios`
---
-
-INSERT INTO `usuarios` (`id`, `nome`, `usuario`, `email`, `senha`, `telefone`, `site`, `biografia`, `sexo`, `foto`) VALUES
-(4, 'João Artur', 'joaoarturmkt', 'contato@joaoartur.com', 'bda9c0d6c8e94670f518f938fdcebf9f', '', NULL, NULL, NULL, '/upload/user/1.jpg'),
-(5, 'JA Solutions', 'jasolutions', 'contato@joaoartur.com', 'bda9c0d6c8e94670f518f938fdcebf9f', '', NULL, NULL, NULL, '/upload/user/1.jpg');
-
 -- --------------------------------------------------------
 
 --
@@ -135,14 +113,6 @@ CREATE TABLE `usuarios_seguir` (
   `id_usuario` int(11) DEFAULT NULL,
   `id_seguido` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `usuarios_seguir`
---
-
-INSERT INTO `usuarios_seguir` (`id`, `id_usuario`, `id_seguido`) VALUES
-(20, 4, 5),
-(21, 5, 4);
 
 --
 -- Índices para tabelas despejadas
@@ -220,13 +190,13 @@ ALTER TABLE `posts_marcacoes`
 -- AUTO_INCREMENT de tabela `post_comments`
 --
 ALTER TABLE `post_comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `post_likes`
 --
 ALTER TABLE `post_likes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `stories`
