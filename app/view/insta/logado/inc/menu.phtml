@@ -1,23 +1,35 @@
-<nav class="menu">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-4">
-                <a class="menu-logo" href="/">MVPGram</a>
-            </div>
-            <div class="col-lg-4">
-                <form action="" method="post" class="formBusca">
-                    <input type="text" class="form-control" placeholder="Busca">
-                </form>
-            </div>
-            <div class="col-lg-4">
-                <ul class="menu-ul">
-                    <li><a href="/"><i class="fas fa-home"></i></a></li>
-                    <li><a href="/direct"><i class="far fa-paper-plane"></i></a></li>
-                    <li><a href="/explore"><i class="far fa-compass"></i></a></li>
-                    <li><a class="menu-notifications" href="javascript:void(0)"><i class="far fa-heart"></i></a></li>
-                    <li><a href=""><i class="far fa-user"></i></a></li>
-                </ul>
-            </div>
+
+        <a class="navbar-brand" href="#">MVPGram</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="/"><i class="fas fa-home"></i></a></li>
+                <li class="nav-item"><a class="nav-link" href="/direct"><i class="far fa-paper-plane"></i></a></li>
+                <li class="nav-item"><a class="nav-link" href="/explore"><i class="far fa-compass"></i></a></li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="far fa-heart"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <?php 
+                        $not = $mvp->getNotifications();
+                        if ($not !== false): 
+                        foreach($not as $n): ?>
+                            <a class="dropdown-item" href="<?=$n->link;?>">
+                            <img src="<?=$n->img;?>" class="post-usericon" alt="">
+                            <?=$n->texto;?>
+                        </a>
+                        <?php endforeach;endif; ?>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link" href=""><i class="far fa-user"></i></a></li>
+            </ul>
         </div>
     </div>
 

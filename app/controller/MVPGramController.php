@@ -15,6 +15,6 @@
         }
 
         public static function dashboard() {
-            return self::load('insta.logado.dash', ['dadosUsuario' => self::$dadosUsuario, 'posts' => self::getPosts()]);
+            return self::load('insta.logado.dash', ['mvp'=> new MVPGram,'dadosUsuario' => self::$dadosUsuario, 'posts' => self::getPosts()]);
         }
     }

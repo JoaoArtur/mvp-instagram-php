@@ -14,6 +14,7 @@ class API
 
     protected function like()
     {
+        $mvp = new MVPGram;
         $id_user = Start::session('id_user');
         $id_post = Start::post("id_post");
         if (isset($_POST['id_post'])) {
@@ -36,6 +37,11 @@ class API
             } else {
                 $qr_like = DB::getInstance()->execute("INSERT INTO post_likes (id_post, id_user) VALUES ($id_post,$id_user)");
                 if ($qr_like->count() > 0) {
+                    $post = $mvp->getPostById($id_post);
+                    $dados = $mvp->getDados();
+                    if ($dados->id != $post->id_usuario) {
+                        $mvp->newNotification($post->id_usuario, $dados->nome . ' curtiu seu post', '/post/' . $id_post, $dados->foto);
+                    }
                     $arr = [
                         'status' => 'likeSuccess',
                     ];
@@ -67,6 +73,12 @@ class API
                     [$id_user, $id_post, $msg]
                 );
                 if ($qr_comment->count() > 0) {
+                    $mvp = new MVPGram;
+                    $post = $mvp->getPostById($id_post);
+                    $dados = $mvp->getDados();
+                    if($dados->id != $post->id_usuario) {
+                        $mvp->newNotification($post->id_usuario, $dados->nome . ' comentou em post', '/post/' . $id_post, $dados->foto);
+                    }
                     $arr = [
                         'status' => true,
                     ];

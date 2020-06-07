@@ -48,6 +48,22 @@ class MVPGram
             return false;
         }
     }
+    public function getPostById($id)
+    {
+        $qr = DB::execute("SELECT p.*, u.nome, u.usuario, u.foto as imagemUsuario,pl.id as liked
+        FROM posts as p
+            INNER JOIN usuarios u ON u.id = p.id_usuario
+            LEFT JOIN post_likes pl ON pl.id_user = ? and pl.id_post = p.id
+        WHERE p.id = ?", [
+            Start::session('id_user'),
+            $id,
+        ]);
+        if ($qr->count() > 0) {
+            return $qr->list(PDO::FETCH_OBJ);
+        } else {
+            return false;
+        }
+    }
     public function getPosts()
     {
         $qr = DB::execute("SELECT p.*, u.nome, u.usuario, u.foto as imagemUsuario,pl.id as liked,
@@ -61,6 +77,26 @@ class MVPGram
         if ($qr->count() > 0) {
             $arr = $qr->generico()->fetchAll(PDO::FETCH_OBJ);
             return $arr;
+        } else {
+            return false;
+        }
+    }
+    public function newNotification($id_user,$texto,$link,$img) {
+        $qr = DB::getInstance()->execute("INSERT INTO usuarios_notificacao (id_user,texto,link,img) VALUES (?,?,?,?)",[
+            $id_user,$texto,$link,$img
+        ]);
+        if ($qr->count() >0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public function getNotifications() {
+        $qr = DB::getInstance()->execute("SELECT * FROM usuarios_notificacao WHERE id_user = ? ORDER BY id DESC", [
+            Start::session('id_user')
+        ]);
+        if ($qr->count() >0) {
+            return $qr->generico()->fetchAll(PDO::FETCH_OBJ);
         } else {
             return false;
         }
@@ -102,6 +138,8 @@ class MVPGram
                 $id_user,
             ]);
             if ($qr->count() > 0) {
+                $dados = $this->getDados();
+                $this->newNotification($id_user, $dados->nome.' seguiu você', '/'.$dados->usuario,$dados->foto);
                 $arr = [
                     'status' => true,
                     'msg' => 'followed',

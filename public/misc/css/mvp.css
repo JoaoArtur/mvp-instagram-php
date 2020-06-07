@@ -60,7 +60,7 @@ li + li{
     background-color: #fff;
     border: 1px solid #eee;
 }
-.card-post .post-usericon {
+.post-usericon {
     height: 50px;
     border-radius: 50%;
 }
