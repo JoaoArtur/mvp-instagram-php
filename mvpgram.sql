@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 31-Maio-2020 às 03:33
+-- Tempo de geração: 09-Jun-2020 às 18:54
 -- Versão do servidor: 10.4.11-MariaDB
 -- versão do PHP: 7.2.31
 
@@ -105,6 +105,20 @@ CREATE TABLE `usuarios` (
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `usuarios_notificacao`
+--
+
+CREATE TABLE `usuarios_notificacao` (
+  `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `texto` varchar(255) NOT NULL,
+  `link` varchar(255) NOT NULL,
+  `img` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `usuarios_seguir`
 --
 
@@ -163,6 +177,13 @@ ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices para tabela `usuarios_notificacao`
+--
+ALTER TABLE `usuarios_notificacao`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk1_user` (`id_user`);
+
+--
 -- Índices para tabela `usuarios_seguir`
 --
 ALTER TABLE `usuarios_seguir`
@@ -178,7 +199,7 @@ ALTER TABLE `usuarios_seguir`
 -- AUTO_INCREMENT de tabela `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `posts_marcacoes`
@@ -190,13 +211,13 @@ ALTER TABLE `posts_marcacoes`
 -- AUTO_INCREMENT de tabela `post_comments`
 --
 ALTER TABLE `post_comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `post_likes`
 --
 ALTER TABLE `post_likes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `stories`
@@ -208,13 +229,19 @@ ALTER TABLE `stories`
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `usuarios_notificacao`
+--
+ALTER TABLE `usuarios_notificacao`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios_seguir`
 --
 ALTER TABLE `usuarios_seguir`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restrições para despejos de tabelas
@@ -252,6 +279,12 @@ ALTER TABLE `post_likes`
 --
 ALTER TABLE `stories`
   ADD CONSTRAINT `stories_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`);
+
+--
+-- Limitadores para a tabela `usuarios_notificacao`
+--
+ALTER TABLE `usuarios_notificacao`
+  ADD CONSTRAINT `usuarios_notificacao_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `usuarios` (`id`);
 
 --
 -- Limitadores para a tabela `usuarios_seguir`
