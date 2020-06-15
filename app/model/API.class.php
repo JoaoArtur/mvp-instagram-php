@@ -81,20 +81,26 @@ class API
 
             $qr = DB::getInstance()->execute("SELECT * FROM posts WHERE id = ?", [$id_post]);
             if ($qr->count() > 0) {
-                $qr_comment = DB::getInstance()->execute(
-                    "INSERT INTO post_comments (id_user,id_post,`message`) VALUES (?,?,?)",
-                    [$id_user, $id_post, $msg]
-                );
-                if ($qr_comment->count() > 0) {
-                    $mvp = new MVPGram;
-                    $post = $mvp->getPostById($id_post);
-                    $dados = $mvp->getDados();
-                    if($dados->id != $post->id_usuario) {
-                        $mvp->newNotification($post->id_usuario, $dados->nome . ' comentou em post', '/post/' . $id_post, $dados->foto);
+                if (trim($msg) != '') {
+                    $qr_comment = DB::getInstance()->execute(
+                        "INSERT INTO post_comments (id_user,id_post,`message`) VALUES (?,?,?)",
+                        [$id_user, $id_post, $msg]
+                    );
+                    if ($qr_comment->count() > 0) {
+                        $mvp = new MVPGram;
+                        $post = $mvp->getPostById($id_post);
+                        $dados = $mvp->getDados();
+                        if ($dados->id != $post->id_usuario) {
+                            $mvp->newNotification($post->id_usuario, $dados->nome . ' comentou em post', '/post/' . $id_post, $dados->foto);
+                        }
+                        $arr = [
+                            'status' => true,
+                        ];
+                    } else {
+                        $arr = [
+                            'status' => false,
+                        ];
                     }
-                    $arr = [
-                        'status' => true,
-                    ];
                 } else {
                     $arr = [
                         'status' => false,
