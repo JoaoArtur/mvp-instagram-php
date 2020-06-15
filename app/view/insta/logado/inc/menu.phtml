@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-
-        <a class="navbar-brand" href="#">MVPGram</a>
+        
+        <a class="navbar-brand" href="/">MVPGram</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -13,12 +13,11 @@
                 <li class="nav-item"><a class="nav-link" href="/explore"><i class="far fa-compass"></i></a></li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="far fa-heart"></i>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <?php 
-                        $not = $mvp->getNotifications();
                         if ($not !== false): 
                         foreach($not as $n): ?>
                             <a class="dropdown-item" href="<?=$n->link;?>">
@@ -28,7 +27,7 @@
                         <?php endforeach;endif; ?>
                     </div>
                 </li>
-                <li class="nav-item"><a class="nav-link" href=""><i class="far fa-user"></i></a></li>
+                <li class="nav-item"><a class="nav-link" href="/<?= $dadosUsuario->usuario;?>"><i class="far fa-user"></i></a></li>
             </ul>
         </div>
     </div>

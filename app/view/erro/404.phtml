@@ -6,19 +6,24 @@ $userLogado = $mvpgram->getDados();
 $user = str_replace('/', '', $_SERVER['REQUEST_URI']);
 $dadosUser = $mvpgram->getDadosByUser($user);
 if ($dadosUser != false) {
-    $idPosts = explode(',', $dadosUser->posts);
-    $posts = $mvpgram->getPostsByUid($dadosUser->id);
-    ?>
+  $idPosts = explode(',', $dadosUser->posts);
+  $posts = $mvpgram->getPostsByUid($dadosUser->id);
+?>
   <div class="container">
     <div id="profile-header" class="row">
       <div class="col-md-3">
-        <img src="<?=$dadosUser->foto;?> " class="w-75 border-round" alt="">
+        <?php if ($dadosUser->foto != '') : ?>
+          <img src="<?= $dadosUser->foto; ?> " class="w-75 border-round" alt="">
+        <?php else : ?>
+          <img src="/upload/sem-foto.png" class="w-75 border-round" alt="">
+        <?php endif; ?>
+
       </div>
       <div class="col-md-7">
-        <h2><?=$dadosUser->usuario;?></h2>
+        <h2><?= $dadosUser->usuario; ?></h2>
         <div class="d-flex">
           <div class="p-2 d-inline">
-            <span class="font-weight-bold"><?=count($idPosts);?></span>&nbsp;publicações
+            <span class="font-weight-bold"><?= count($idPosts); ?></span>&nbsp;publicações
           </div>
           <div class="p-2 d-inline">
             <span class="font-weight-bold">100</span>&nbsp;seguidores
@@ -27,40 +32,40 @@ if ($dadosUser != false) {
             <span class="font-weight-bold">50</span>&nbsp;seguindo
           </div>
         </div>
-        <p class="font-weight-bold"><?=$dadosUser->nome;?></p>
-        <p class="mb-0"><?=nl2br($dadosUser->biografia);?></p>
-        <p><a target="_blank" class="profile-link font-weight-bold" href="<?=$dadosUser->site;?>"><?=str_replace(['https', 'http', ':', '/'], '', $dadosUser->site);?></a></p>
-        <?php if ($user != $userLogado->usuario):
-        if ($mvpgram->checkFollow($dadosUser->id)) {
+        <p class="font-weight-bold"><?= $dadosUser->nome; ?></p>
+        <p class="mb-0"><?= nl2br($dadosUser->biografia); ?></p>
+        <p><a target="_blank" class="profile-link font-weight-bold" href="<?= $dadosUser->site; ?>"><?= str_replace(['https', 'http', ':', '/'], '', $dadosUser->site); ?></a></p>
+        <?php if ($user != $userLogado->usuario) :
+          if ($mvpgram->checkFollow($dadosUser->id)) {
             $txt = 'Deixar de seguir';
-        } else {
+          } else {
             $txt = 'Seguir';
-        }
+          }
         ?>
-		          <a href="" class="btn btn-primary followUser" data-usuario="<?=$dadosUser->id;?>"><?=$txt;?></a>
-		        <?php endif;?>
+          <a href="" class="btn btn-primary followUser" data-usuario="<?= $dadosUser->id; ?>"><?= $txt; ?></a>
+        <?php endif; ?>
       </div>
     </div>
     <hr>
     <div id="profile-posts" class="row">
       <?php
-foreach ($posts as $post) {
-        ?>
+      foreach ($posts as $post) {
+      ?>
         <div class="col-lg-4 col-md-6 col-sm-12">
           <div class="card card-post">
             <div class="card-header">
-              <img class="post-usericon" src="<?=$post->imagemUsuario;?>" alt="João Artur">
-              <span><?=$post->usuario;?></span>
+              <img class="post-usericon" src="<?= $post->imagemUsuario; ?>" alt="João Artur">
+              <span><?= $post->usuario; ?></span>
             </div>
 
-            <div class="card-body post-image" data-img="<?=$post->imagem;?>" data-idpost="<?=$post->id;?>">
+            <div class="card-body post-image" data-img="<?= $post->imagem; ?>" data-idpost="<?= $post->id; ?>">
 
             </div>
 
             <div class="card-footer">
               <div class="actionButtons">
-                <div class="item likeButton" data-idPost="<?=$post->id?>">
-                  <i class="<?=($post->liked > 0) ? 'text-danger fas' : 'far';?> fa-heart"></i>
+                <div class="item likeButton" data-idPost="<?= $post->id ?>">
+                  <i class="<?= ($post->liked > 0) ? 'text-danger fas' : 'far'; ?> fa-heart"></i>
                 </div>
                 <div class="item">
                   <i class="far fa-comment"></i>
@@ -74,21 +79,21 @@ foreach ($posts as $post) {
 
               <div class="post-comments">
                 <div class="comment">
-                  <span class="user"><?=$post->usuario;?></span>
-                  <span class="text"><?=nl2br($post->descricao);?></span>
+                  <span class="user"><?= $post->usuario; ?></span>
+                  <span class="text"><?= nl2br($post->descricao); ?></span>
                 </div>
               </div>
             </div>
           </div>
         </div>
       <?php
-}
-    ?>
+      }
+      ?>
     </div>
   </div>
 <?php
 } else {
-    ?>
+?>
   <div class="container">
     <p class="text-center">Usuário não encontrado</p>
   </div>

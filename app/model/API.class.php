@@ -11,7 +11,20 @@ class API
     {
         return new API();
     }
-
+    public function setOnesignalId() {
+        if (isset($_POST['id'])) {
+            $id = Start::post('id');
+            $uid = Start::session('id_user');
+            $qr = DB::getInstance()->execute("UPDATE usuarios SET onesignal_id = ? WHERE id = ?",[
+                $id,$uid
+            ]);
+            if ($qr->count() > 0) {
+                return ['status'=>true];
+            } else {
+                return ['status'=>false];
+            }
+        }
+    }
     protected function like()
     {
         $mvp = new MVPGram;

@@ -12,9 +12,9 @@ Config::add('GOOGLE_ANALYTICS', '');
 
 // Database configuration
 Config::add('DB_HOST', 'localhost');
-Config::add('DB_USUARIO', 'root');
-Config::add('DB_SENHA', '');
-Config::add('DB_NOME', 'mvpgram');
+Config::add('DB_USUARIO', 'u539026225_mvp');
+Config::add('DB_SENHA', '!pmLi@Ru');
+Config::add('DB_NOME', 'u539026225_mvpgram');
 
 // E-mail configuration
 Config::add('SMTP_HOST', 'smtp.exemplo.com');

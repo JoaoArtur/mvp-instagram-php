@@ -1,0 +1,14 @@
+# Redireciona para pasta publica
+Options +FollowSymlinks
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^$ public/ [QSA,L]
+RewriteRule (.*) public/$1 [QSA,L]
+
+# DO NOT REMOVE THIS LINE AND THE LINES BELLOW SSL_REDIRECT:mvpgram.joaoartur.com
+RewriteEngine on
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP_HOST} (www\.)?mvpgram.joaoartur.com
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# DO NOT REMOVE THIS LINE AND THE LINES BELLOW SSL_REDIRECT:mvpgram.joaoartur.com
